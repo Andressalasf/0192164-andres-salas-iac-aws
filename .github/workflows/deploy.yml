@@ -35,6 +35,16 @@ jobs:
           aws cloudformation validate-template \
             --template-body file://templates/template.yaml
 
+      - name: Limpiar stack fallido (si quedo en ROLLBACK_COMPLETE)
+        run: |
+          STATUS=$(aws cloudformation describe-stacks --stack-name ${{ env.STACK_NAME }} \
+            --query "Stacks[0].StackStatus" --output text 2>/dev/null || echo "NO_EXISTE")
+          echo "Estado actual del stack: $STATUS"
+          if [ "$STATUS" = "ROLLBACK_COMPLETE" ]; then
+            aws cloudformation delete-stack --stack-name ${{ env.STACK_NAME }}
+            aws cloudformation wait stack-delete-complete --stack-name ${{ env.STACK_NAME }}
+          fi
+
       - name: Desplegar el stack de CloudFormation
         run: |
           aws cloudformation deploy \
