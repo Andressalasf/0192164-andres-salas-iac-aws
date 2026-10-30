@@ -5,7 +5,7 @@ Parameters:
   InstanceDescription:
     Description: Texto principal que se mostrara en la pagina web
     Type: String
-    Default: Servidor Web de Andrés Salas
+    Default: Servidor Web de Andrés Salas v2
 
   SecurityGroupDescription:
     Description: Descripcion del Security Group
@@ -19,7 +19,7 @@ Parameters:
 
 Resources:
 
-  MyInstanceClase:
+  MyInstanceClaseV2:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !Ref LatestAmiId
@@ -28,9 +28,13 @@ Resources:
         - !Ref ServerSecurityGroupClase
       Tags:
         - Key: Name
-          Value: EC2-Clase-CF
+          Value: EC2-AndresSalas-v2
         - Key: Proyecto
           Value: Class-CloudFormation
+        - Key: Estudiante
+          Value: Andres Salas 0192164
+        - Key: Version
+          Value: v2
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -48,36 +52,41 @@ Resources:
             <style>
               * { box-sizing: border-box; }
               body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif;
-                     background: linear-gradient(135deg, #0b1d33, #12395c);
+                     background: linear-gradient(135deg, #0f2e24, #1b5e4a);
                      color: #e6edf5; min-height: 100vh; display: flex;
                      align-items: center; justify-content: center; padding: 24px; }
-              .card { background: rgba(255,255,255,0.06); border: 1px solid #2f5d85;
+              .card { background: rgba(255,255,255,0.06); border: 1px solid #3fa37f;
                       border-radius: 16px; padding: 32px 40px; max-width: 640px; }
-              .tag { display: inline-block; background: #ff9900; color: #111;
+              .tag { display: inline-block; background: #34d399; color: #062a1e;
                      font-weight: 700; font-size: 12px; padding: 4px 10px;
                      border-radius: 20px; letter-spacing: 1px; }
-              h1 { color: #ffb84d; margin: 16px 0 4px; }
-              h2 { font-weight: 400; color: #9cc3e6; margin: 0 0 20px; font-size: 18px; }
+              h1 { color: #a7f3d0; margin: 16px 0 4px; }
+              h2 { font-weight: 400; color: #d1fae5; margin: 0 0 20px; font-size: 18px; }
               ul { padding-left: 20px; line-height: 1.7; }
-              a { color: #ffb84d; }
-              footer { margin-top: 20px; font-size: 13px; color: #8aa4bd; }
+              a { color: #6ee7b7; }
+              .v2 { background: rgba(52,211,153,0.12); border-left: 4px solid #34d399;
+                    padding: 10px 14px; border-radius: 8px; margin: 16px 0; }
+              footer { margin-top: 20px; font-size: 13px; color: #9fd8c2; }
             </style>
           </head>
           <body>
             <div class="card">
-              <span class="tag">CLOUD COMPUTING · UFPSO</span>
+              <span class="tag">CLOUD COMPUTING · UFPSO · VERSIÓN 2</span>
               <h1>${InstanceDescription} 👏</h1>
-              <h2>Hola desde CloudFormation con GitHub 🚀</h2>
+              <h2>Página actualizada con un nuevo commit en GitHub 🔄</h2>
               <p><strong>Andrés Salas</strong> · Código 0192164<br>
                  Ingeniería de Sistemas · Universidad Francisco de Paula Santander Ocaña</p>
               <p>Esta página fue publicada sin entrar al servidor: el repositorio en GitHub
                  describe la infraestructura y GitHub Actions la crea en AWS.</p>
+              <div class="v2"><strong>Cambios de esta versión:</strong> nuevos colores, nuevo texto,
+                 nuevas etiquetas en la instancia y un enlace a la documentación de AWS.</div>
               <ul>
                 <li>Infraestructura: AWS CloudFormation</li>
                 <li>Automatización: GitHub Actions</li>
                 <li>Servidor: EC2 t3.micro con Apache</li>
               </ul>
-              <p><a href="https://github.com/Andressalasf/0192164-andres-salas-iac-aws">Ver el repositorio del proyecto</a></p>
+              <p><a href="https://github.com/Andressalasf/0192164-andres-salas-iac-aws">Ver el repositorio del proyecto</a> ·
+                 <a href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/Welcome.html">Documentación de CloudFormation</a></p>
               <footer>Docente: Wilder Andrés Duarte Neira</footer>
             </div>
           </body>
@@ -101,12 +110,12 @@ Outputs:
 
   InstanceId:
     Description: ID de la instancia EC2
-    Value: !Ref MyInstanceClase
+    Value: !Ref MyInstanceClaseV2
 
   PublicIP:
     Description: IP publica de la instancia
-    Value: !GetAtt MyInstanceClase.PublicIp
+    Value: !GetAtt MyInstanceClaseV2.PublicIp
 
   WebsiteURL:
     Description: URL para abrir la pagina web
-    Value: !Sub http://${MyInstanceClase.PublicIp}
+    Value: !Sub http://${MyInstanceClaseV2.PublicIp}
