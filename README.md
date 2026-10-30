@@ -21,4 +21,6 @@ personalizada. La infraestructura está definida en `templates/template.yaml`
 
 ## Sitio web desplegado
 
-Pendiente: http://IP_PUBLICA
+http://3.90.248.104
+
+(La IP cambia si la instancia se vuelve a crear.)
