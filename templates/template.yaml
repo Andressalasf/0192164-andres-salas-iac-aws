@@ -19,7 +19,7 @@ Parameters:
 
 Resources:
 
-  MyInstanceClaseV2:
+  MyInstanceClaseV3:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !Ref LatestAmiId
@@ -28,13 +28,13 @@ Resources:
         - !Ref ServerSecurityGroupClase
       Tags:
         - Key: Name
-          Value: EC2-AndresSalas-v2
+          Value: EC2-AndresSalas-v3
         - Key: Proyecto
           Value: Class-CloudFormation
         - Key: Estudiante
           Value: Andres Salas 0192164
         - Key: Version
-          Value: v2
+          Value: v3
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash
@@ -46,49 +46,155 @@ Resources:
           <!DOCTYPE html>
           <html lang="es">
           <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>Andrés Salas | IaC AWS</title>
-            <style>
-              * { box-sizing: border-box; }
-              body { margin: 0; font-family: 'Segoe UI', Arial, sans-serif;
-                     background: linear-gradient(135deg, #0f2e24, #1b5e4a);
-                     color: #e6edf5; min-height: 100vh; display: flex;
-                     align-items: center; justify-content: center; padding: 24px; }
-              .card { background: rgba(255,255,255,0.06); border: 1px solid #3fa37f;
-                      border-radius: 16px; padding: 32px 40px; max-width: 640px; }
-              .tag { display: inline-block; background: #34d399; color: #062a1e;
-                     font-weight: 700; font-size: 12px; padding: 4px 10px;
-                     border-radius: 20px; letter-spacing: 1px; }
-              h1 { color: #a7f3d0; margin: 16px 0 4px; }
-              h2 { font-weight: 400; color: #d1fae5; margin: 0 0 20px; font-size: 18px; }
-              ul { padding-left: 20px; line-height: 1.7; }
-              a { color: #6ee7b7; }
-              .v2 { background: rgba(52,211,153,0.12); border-left: 4px solid #34d399;
-                    padding: 10px 14px; border-radius: 8px; margin: 16px 0; }
-              footer { margin-top: 20px; font-size: 13px; color: #9fd8c2; }
-            </style>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>~*~ Andres Salas :: Servidor Retro ~*~</title>
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+          <style>
+          :root{--rosa:#ff4fd8;--cian:#00e5ff;--lima:#b6ff00;--lila:#7b3cff;--noche:#120634;--gris:#c0c0c0;--osc:#808080}
+          *{box-sizing:border-box;margin:0;padding:0}
+          html{image-rendering:pixelated}
+          body{min-height:100vh;font-family:'VT323',monospace;font-size:22px;line-height:1.15;color:#1a0b3d;
+          background-color:var(--noche);
+          background-image:radial-gradient(#ffffff 1px,transparent 1.5px),radial-gradient(#00e5ff 1px,transparent 1.5px),linear-gradient(180deg,#120634 0%,#3a0f6b 60%,#ff4fd8 140%);
+          background-size:64px 64px,96px 96px,100% 100%;background-position:0 0,32px 48px,0 0;background-attachment:fixed;
+          padding:28px 14px 70px}
+          body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
+          background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 1px,transparent 1px 3px)}
+          .ventana{max-width:780px;margin:0 auto;background:var(--gris);padding:3px;
+          box-shadow:inset -2px -2px #0a0a0a,inset 2px 2px #fff,inset -4px -4px var(--osc),inset 4px 4px #dfdfdf,8px 8px 0 #000}
+          .barra{display:flex;align-items:center;gap:8px;padding:4px 4px 4px 8px;color:#fff;
+          background:linear-gradient(90deg,#000080,var(--lila) 55%,var(--rosa));font-family:'Press Start 2P',monospace;font-size:10px}
+          .barra span{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+          .btn{width:22px;height:20px;background:var(--gris);color:#000;font:bold 12px/18px monospace;text-align:center;
+          box-shadow:inset -1px -1px #0a0a0a,inset 1px 1px #fff,inset -2px -2px var(--osc),inset 2px 2px #dfdfdf}
+          .menu{display:flex;gap:18px;padding:4px 10px;font-size:20px}
+          .menu u{text-decoration:none;border-bottom:2px solid #000}
+          .marco{margin:4px;background:#fff8ff;padding:18px;
+          box-shadow:inset 2px 2px var(--osc),inset -2px -2px #fff,inset 4px 4px #0a0a0a,inset -4px -4px #dfdfdf}
+          .marquee{overflow:hidden;white-space:nowrap;background:#000;color:var(--lima);padding:6px 0;margin-bottom:18px;
+          border:3px solid var(--cian);font-family:'Press Start 2P',monospace;font-size:11px}
+          .marquee b{display:inline-block;padding-left:100%;animation:corre 18s steps(180) infinite;font-weight:normal}
+          @keyframes corre{to{transform:translateX(-100%)}}
+          .cabeza{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+          .cabeza>div:last-child{flex:1;min-width:230px}
+          .tile{flex:none;background:var(--lila);border:3px solid #000;padding:12px 14px 10px 10px;box-shadow:4px 4px 0 var(--cian)}
+          .icono{position:relative;width:95px;height:50px;animation:flota 2s steps(2) infinite}
+          .icono:before{content:"";position:absolute;left:-5px;top:-5px;width:5px;height:5px;box-shadow:35px 5px #1a0b3d,40px 5px #1a0b3d,45px 5px #1a0b3d,50px 5px #1a0b3d,25px 10px #1a0b3d,30px 10px #1a0b3d,35px 10px #ffffff,40px 10px #ffffff,45px 10px #ffffff,50px 10px #ffffff,55px 10px #1a0b3d,60px 10px #1a0b3d,20px 15px #1a0b3d,25px 15px #ffffff,30px 15px #ffffff,35px 15px #ffffff,40px 15px #ffffff,45px 15px #ffffff,50px 15px #ffffff,55px 15px #ffffff,60px 15px #ffffff,65px 15px #1a0b3d,15px 20px #1a0b3d,20px 20px #ffffff,25px 20px #ffffff,30px 20px #ffffff,35px 20px #ffffff,40px 20px #ffffff,45px 20px #ffffff,50px 20px #ffffff,55px 20px #ffffff,60px 20px #ffffff,65px 20px #ffffff,70px 20px #1a0b3d,75px 20px #1a0b3d,80px 20px #1a0b3d,10px 25px #1a0b3d,15px 25px #ffffff,20px 25px #ffffff,25px 25px #ffffff,30px 25px #ffffff,35px 25px #ffffff,40px 25px #ffffff,45px 25px #ffffff,50px 25px #ffffff,55px 25px #ffffff,60px 25px #ffffff,65px 25px #ffffff,70px 25px #ffffff,75px 25px #ffffff,80px 25px #ffffff,85px 25px #ffffff,90px 25px #1a0b3d,5px 30px #1a0b3d,10px 30px #ffffff,15px 30px #ffffff,20px 30px #ffffff,25px 30px #ffffff,30px 30px #ffffff,35px 30px #ffffff,40px 30px #ffffff,45px 30px #ffffff,50px 30px #ffffff,55px 30px #ffffff,60px 30px #ffffff,65px 30px #ffffff,70px 30px #ffffff,75px 30px #ffffff,80px 30px #ffffff,85px 30px #9fd8ff,90px 30px #1a0b3d,5px 35px #1a0b3d,10px 35px #ffffff,15px 35px #ffffff,20px 35px #ffffff,25px 35px #ffffff,30px 35px #ffffff,35px 35px #ffffff,40px 35px #ffffff,45px 35px #ffffff,50px 35px #ffffff,55px 35px #ffffff,60px 35px #ffffff,65px 35px #ffffff,70px 35px #ffffff,75px 35px #ffffff,80px 35px #9fd8ff,85px 35px #9fd8ff,90px 35px #1a0b3d,10px 40px #1a0b3d,15px 40px #9fd8ff,20px 40px #9fd8ff,25px 40px #9fd8ff,30px 40px #9fd8ff,35px 40px #9fd8ff,40px 40px #9fd8ff,45px 40px #9fd8ff,50px 40px #9fd8ff,55px 40px #9fd8ff,60px 40px #9fd8ff,65px 40px #9fd8ff,70px 40px #9fd8ff,75px 40px #9fd8ff,80px 40px #9fd8ff,85px 40px #1a0b3d,15px 45px #1a0b3d,20px 45px #1a0b3d,25px 45px #1a0b3d,30px 45px #1a0b3d,35px 45px #1a0b3d,40px 45px #1a0b3d,45px 45px #1a0b3d,50px 45px #1a0b3d,55px 45px #1a0b3d,60px 45px #1a0b3d,65px 45px #1a0b3d,70px 45px #1a0b3d,75px 45px #1a0b3d,80px 45px #1a0b3d}
+          @keyframes flota{50%{transform:translateY(-4px)}}
+          h1{font-family:'Press Start 2P',monospace;font-size:20px;line-height:1.5;color:var(--lila);
+          text-shadow:3px 3px 0 var(--cian)}
+          .sub{margin-top:8px;font-size:24px;color:#3a0f6b}
+          .nuevo{display:inline-block;background:#ff0040;color:#fff;font-family:'Press Start 2P',monospace;font-size:9px;
+          padding:4px 6px;margin-left:6px;vertical-align:middle;animation:parpadea 1s steps(1) infinite}
+          @keyframes parpadea{50%{opacity:0}}
+          .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+          .caja{border:3px solid #000;background:#fff;box-shadow:5px 5px 0 var(--lila)}
+          .caja h2{font-family:'Press Start 2P',monospace;font-size:10px;color:#fff;background:#000;padding:8px 10px;letter-spacing:1px}
+          .caja .in{padding:10px 12px}
+          table{width:100%;border-collapse:collapse}
+          td{padding:3px 0;vertical-align:top}
+          td:first-child{color:var(--osc);width:1%;white-space:nowrap;padding-right:14px}
+          ul{list-style:none}
+          li{padding:3px 0 3px 26px;position:relative}
+          li:before{content:"";position:absolute;left:-3px;top:4px;width:3px;height:3px;box-shadow:9px 3px #fff36b,6px 6px #fff36b,9px 6px #fff36b,12px 6px #fff36b,3px 9px #fff36b,6px 9px #fff36b,9px 9px #fff36b,12px 9px #fff36b,15px 9px #fff36b,6px 12px #fff36b,9px 12px #fff36b,12px 12px #fff36b,9px 15px #fff36b}
+          .term{margin-top:20px;background:#000;color:var(--lima);padding:12px 14px;border:3px solid #000;
+          box-shadow:5px 5px 0 var(--rosa);font-size:21px}
+          .term p:before{content:"C:\\> ";color:var(--cian)}
+          .cursor{display:inline-block;width:11px;height:19px;background:var(--lima);vertical-align:-3px;animation:parpadea 1s steps(1) infinite}
+          .carga{margin-top:20px}
+          .carga small{font-family:'Press Start 2P',monospace;font-size:9px}
+          .pista{margin-top:6px;height:26px;padding:3px;background:#fff;
+          box-shadow:inset 2px 2px var(--osc),inset -2px -2px #fff,inset 4px 4px #0a0a0a,inset -4px -4px #dfdfdf}
+          .pista div{height:100%;width:100%;background:repeating-linear-gradient(90deg,#000080 0 14px,transparent 14px 17px);
+          animation:llena 3s steps(24) 1}
+          @keyframes llena{from{width:0}}
+          .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;justify-content:center}
+          .badge{width:88px;height:31px;display:flex;align-items:center;justify-content:center;text-align:center;
+          font-family:'Press Start 2P',monospace;font-size:7px;line-height:1.3;border:2px solid #000;color:#000;text-decoration:none}
+          .b1{background:var(--lima)}.b2{background:var(--cian)}.b3{background:var(--rosa);color:#fff}.b4{background:#fff36b}
+          .b5{background:#000;color:var(--lima)}
+          a.badge:hover{transform:translate(2px,2px)}
+          .pie{margin-top:20px;text-align:center;font-size:20px;color:#3a0f6b}
+          .corazon{display:inline-block;position:relative;width:24px;height:21px;vertical-align:middle}
+          .corazon:before{content:"";position:absolute;left:-3px;top:-3px;width:3px;height:3px;box-shadow:6px 3px #ff4fd8,9px 3px #ff4fd8,15px 3px #ff4fd8,18px 3px #ff4fd8,3px 6px #ff4fd8,6px 6px #ff4fd8,9px 6px #ff4fd8,12px 6px #ff4fd8,15px 6px #ff4fd8,18px 6px #ff4fd8,21px 6px #ff4fd8,3px 9px #ff4fd8,6px 9px #ff4fd8,9px 9px #ff4fd8,12px 9px #ff4fd8,15px 9px #ff4fd8,18px 9px #ff4fd8,21px 9px #ff4fd8,6px 12px #ff4fd8,9px 12px #ff4fd8,12px 12px #ff4fd8,15px 12px #ff4fd8,18px 12px #ff4fd8,9px 15px #ff4fd8,12px 15px #ff4fd8,15px 15px #ff4fd8,12px 18px #ff4fd8}
+          .contador{display:inline-block;background:#000;color:#ff3030;font-family:'Press Start 2P',monospace;font-size:12px;
+          padding:5px 6px;letter-spacing:3px;border:2px inset var(--gris)}
+          .tareas{position:fixed;left:0;right:0;bottom:0;height:40px;background:var(--gris);display:flex;align-items:center;
+          gap:8px;padding:0 6px;z-index:60;box-shadow:inset 0 2px #fff,inset 0 3px #dfdfdf}
+          .inicio{font-family:'Press Start 2P',monospace;font-size:10px;padding:7px 10px;background:var(--gris);
+          box-shadow:inset -2px -2px #0a0a0a,inset 2px 2px #fff,inset -3px -3px var(--osc)}
+          .tarea{flex:1;max-width:260px;font-size:19px;padding:4px 10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+          box-shadow:inset 2px 2px #0a0a0a,inset -2px -2px #fff,inset 3px 3px var(--osc)}
+          .reloj{margin-left:auto;padding:4px 12px;font-size:20px;box-shadow:inset 1px 1px var(--osc),inset -1px -1px #fff}
+          @media (max-width:640px){body{font-size:20px}.grid{grid-template-columns:1fr}h1{font-size:15px}
+          .menu{gap:10px;font-size:18px}.tarea{display:none}.marco{padding:12px}.term{font-size:18px}}
+          </style>
           </head>
           <body>
-            <div class="card">
-              <span class="tag">CLOUD COMPUTING · UFPSO · VERSIÓN 2</span>
-              <h1>${InstanceDescription} 👏</h1>
-              <h2>Página actualizada con un nuevo commit en GitHub 🔄</h2>
-              <p><strong>Andrés Salas</strong> · Código 0192164<br>
-                 Ingeniería de Sistemas · Universidad Francisco de Paula Santander Ocaña</p>
-              <p>Esta página fue publicada sin entrar al servidor: el repositorio en GitHub
-                 describe la infraestructura y GitHub Actions la crea en AWS.</p>
-              <div class="v2"><strong>Cambios de esta versión:</strong> nuevos colores, nuevo texto,
-                 nuevas etiquetas en la instancia y un enlace a la documentación de AWS.</div>
-              <ul>
-                <li>Infraestructura: AWS CloudFormation</li>
-                <li>Automatización: GitHub Actions</li>
-                <li>Servidor: EC2 t3.micro con Apache</li>
-              </ul>
-              <p><a href="https://github.com/Andressalasf/0192164-andres-salas-iac-aws">Ver el repositorio del proyecto</a> ·
-                 <a href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/Welcome.html">Documentación de CloudFormation</a></p>
-              <footer>Docente: Wilder Andrés Duarte Neira</footer>
+          <div class="ventana">
+            <div class="barra"><span>C:\NUBE\andres_salas.htm - Servidor EC2</span>
+              <div class="btn">_</div><div class="btn">&#9633;</div><div class="btn">x</div></div>
+            <div class="menu"><div><u>A</u>rchivo</div><div><u>E</u>ditar</div><div><u>V</u>er</div><div>A<u>y</u>uda</div></div>
+            <div class="marco">
+              <div class="marquee"><b>*** BIENVENIDO A MI SERVIDOR EN LA NUBE *** CREADO CON CLOUDFORMATION + GITHUB ACTIONS *** SIN TOCAR LA CONSOLA DE AWS *** GRACIAS POR TU VISITA ***</b></div>
+              <div class="cabeza">
+                <div class="tile"><div class="icono" aria-hidden="true"></div></div>
+                <div>
+                  <h1>${InstanceDescription}</h1>
+                  <p class="sub">Hola desde CloudFormation con GitHub <span class="nuevo">NUEVO!</span></p>
+                </div>
+              </div>
+              <div class="grid">
+                <div class="caja"><h2>&gt; PERFIL.TXT</h2><div class="in"><table>
+                  <tr><td>Nombre</td><td><b>Andrés Salas</b></td></tr>
+                  <tr><td>Código</td><td>0192164</td></tr>
+                  <tr><td>Programa</td><td>Ingeniería de Sistemas</td></tr>
+                  <tr><td>Universidad</td><td>UFPS Ocaña</td></tr>
+                  <tr><td>Asignatura</td><td>Cloud Computing</td></tr>
+                  <tr><td>Docente</td><td>Wilder Andrés Duarte Neira</td></tr>
+                </table></div></div>
+                <div class="caja"><h2>&gt; PROYECTO.EXE</h2><div class="in"><ul>
+                  <li>Infraestructura: AWS CloudFormation</li>
+                  <li>Automatización: GitHub Actions</li>
+                  <li>Servidor: EC2 t3.micro + Apache</li>
+                  <li>Firewall: Security Group, puerto 80</li>
+                  <li>Página creada por User Data</li>
+                </ul></div></div>
+              </div>
+              <div class="term">
+                <p>git push origin main</p>
+                <p>github actions ......... [ OK ]</p>
+                <p>cloudformation deploy .. [ OK ]</p>
+                <p>apache httpd ........... [ OK ] <span class="cursor"></span></p>
+              </div>
+              <div class="carga"><small>CARGANDO NUBE... 100%</small><div class="pista"><div></div></div></div>
+              <div class="badges">
+                <a class="badge b1" href="https://github.com/Andressalasf/0192164-andres-salas-iac-aws">VER MI<br>REPOSITORIO</a>
+                <a class="badge b2" href="https://docs.aws.amazon.com/es_es/AWSCloudFormation/latest/UserGuide/Welcome.html">DOCS<br>CLOUDFORMATION</a>
+                <span class="badge b3">HECHO<br>CON HTML</span>
+                <span class="badge b4">MEJOR EN<br>800x600</span>
+                <span class="badge b5">IaC<br>POWERED</span>
+              </div>
+              <p class="pie">Hecho con <span class="corazon"></span> en Ocaña &middot; Tus visitas: <span class="contador" id="contador">000001</span></p>
             </div>
+          </div>
+          <div class="tareas">
+            <div class="inicio">INICIO</div>
+            <div class="tarea">andres_salas.htm</div>
+            <div class="reloj" id="reloj">--:--</div>
+          </div>
+          <script>
+          (function(){
+            function dos(n){return (n<10?'0':'')+n;}
+            function hora(){var d=new Date();document.getElementById('reloj').textContent=dos(d.getHours())+':'+dos(d.getMinutes());}
+            hora();setInterval(hora,10000);
+            var c=1;try{c=(parseInt(localStorage.getItem('visitas'),10)||0)+1;localStorage.setItem('visitas',c);}catch(e){}
+            var s=String(c);while(s.length<6){s='0'+s;}
+            document.getElementById('contador').textContent=s;
+          })();
+          </script>
           </body>
           </html>
           EOF
@@ -110,12 +216,12 @@ Outputs:
 
   InstanceId:
     Description: ID de la instancia EC2
-    Value: !Ref MyInstanceClaseV2
+    Value: !Ref MyInstanceClaseV3
 
   PublicIP:
     Description: IP publica de la instancia
-    Value: !GetAtt MyInstanceClaseV2.PublicIp
+    Value: !GetAtt MyInstanceClaseV3.PublicIp
 
   WebsiteURL:
     Description: URL para abrir la pagina web
-    Value: !Sub http://${MyInstanceClaseV2.PublicIp}
+    Value: !Sub http://${MyInstanceClaseV3.PublicIp}
